@@ -4,14 +4,16 @@
 import { useUser } from "@clerk/clerk-react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoutes = ({children}:any) => {
-    const {isSignedIn,isLoaded}=useUser();
+const ProtectedRoutes = ({ children }: any) => {
+    const { isSignedIn, isLoaded } = useUser();
 
-    if(isLoaded && !isSignedIn && isSignedIn!==undefined){
+    //if the user is not signed in, then it will redirect to the landing page
+    if (isLoaded && !isSignedIn && isSignedIn !== undefined) {
         return <Navigate to="/?sign-in=true" />
     }
-
     return children;
 }
+
+
 
 export default ProtectedRoutes;
