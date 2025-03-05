@@ -18,7 +18,7 @@ export const getCourseByIdController = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const course = await prisma.course.findUnique({
-      where: { id: parseInt(id) },
+      where: { title: id },
       include: {
         category: true,
       },

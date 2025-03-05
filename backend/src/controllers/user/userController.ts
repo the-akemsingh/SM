@@ -18,11 +18,11 @@ export const getUserbyIdController = async (req: Request, res: Response) => {
     const user = await prisma.user.findUnique({
       where:  { clerkuserId },
     });
-    if (user) {
-      res.status(200).json(user);
-    } else {
+    if (!user) {
       res.status(404).json({ error: "User not found" });
+      return;
     }
+    res.status(200).json(user);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Internal server error" });
